@@ -21,7 +21,7 @@ echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 
 
 # set time GMT +7
-ln -fs /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+ln -fs /usr/share/zoneinfo/Asia/Saigon /etc/localtime
 
 # install webmin
 cd
@@ -514,6 +514,7 @@ accept = 444
 connect = 127.0.0.1:443
 cert = /etc/stunnel/stunnel.pem
 END
+/etc/init.d/stunnel4 restart
 
 #Setting UFW
 ufw allow ssh
