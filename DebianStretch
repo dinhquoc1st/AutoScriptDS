@@ -560,7 +560,7 @@ client = nob
 
 [openvpn]
 accept = 587
-connect = 127.0.0.1:1147
+connect = 127.0.0.1:110
 cert = /etc/stunnel/stunnel.pem
 
 [dropbear]
