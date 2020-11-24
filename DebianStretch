@@ -197,7 +197,6 @@ cipher none
 auth none
 duplicate-cn
 max-clients 50
-
 END
 systemctl start openvpn@server
 #Create OpenVPN Config
@@ -237,7 +236,6 @@ dhcp-option DNS 1.0.0.1
 http-proxy $MYIP 3356
 http-proxy-option CUSTOM-HEADER ""
 http-proxy-option CUSTOM-HEADER "POST https://viber.com HTTP/1.0"
-
 END
 echo '<ca>' >> /home/vps/public_html/sun-tuctc.ovpn
 cat /etc/openvpn/ca.crt >> /home/vps/public_html/sun-tuctc.ovpn
@@ -274,7 +272,6 @@ nice -20
 reneg-sec 0
 dhcp-option DNS 1.1.1.1
 dhcp-option DNS 1.0.0.1
-
 END
 echo '<ca>' >> /home/vps/public_html/noload.ovpn
 cat /etc/openvpn/ca.crt >> /home/vps/public_html/noload.ovpn
@@ -316,7 +313,6 @@ http-proxy $MYIP 3356
 http-proxy-option CUSTOM-HEADER ""
 http-proxy-option CUSTOM-HEADER "POST https://viber.com HTTP/1.1"
 http-proxy-option CUSTOM-HEADER "Proxy-Connection: Keep-Alive"
-
 END
 echo '<ca>' >> /home/vps/public_html/fixplan.ovpn
 cat /etc/openvpn/ca.crt >> /home/vps/public_html/fixplan.ovpn
@@ -357,7 +353,6 @@ dhcp-option DNS 1.0.0.1
 mt
 1234
 </auth-user-pass>
-
 END
 echo '<ca>' >> /home/vps/public_html/default.ovpn
 cat /etc/openvpn/ca.crt >> /home/vps/public_html/default.ovpn
@@ -401,7 +396,6 @@ http-proxy-option CUSTOM-HEADER Host line.telegram.me
 http-proxy-option CUSTOM-HEADER X-Online-Host line.telegram.me
 http-proxy-option CUSTOM-HEADER X-Forward-Host line.telegram.me
 http-proxy-option CUSTOM-HEADER Connection Keep-Alive
-
 END
 echo '<ca>' >> /home/vps/public_html/tu200.ovpn
 cat /etc/openvpn/ca.crt >> /home/vps/public_html/tu200.ovpn
@@ -445,7 +439,6 @@ http-proxy-option CUSTOM-HEADER Host i.ytimg.com
 http-proxy-option CUSTOM-HEADER X-Online-Host i.ytimg.com
 http-proxy-option CUSTOM-HEADER X-Forward-Host i.ytimg.com
 http-proxy-option CUSTOM-HEADER Connection Keep-Alive
-
 END
 echo '<ca>' >> /home/vps/public_html/gtmfbig.ovpn
 cat /etc/openvpn/ca.crt >> /home/vps/public_html/gtmfbig.ovpn
@@ -489,7 +482,6 @@ http-proxy-option CUSTOM-HEADER Host data.iflix.com
 http-proxy-option CUSTOM-HEADER X-Online-Host data.iflix.com
 http-proxy-option CUSTOM-HEADER X-Forward-Host data.iflix.com
 http-proxy-option CUSTOM-HEADER Connection Keep-Alive
-
 END
 echo '<ca>' >> /home/vps/public_html/sunfreeyt.ovpn
 cat /etc/openvpn/ca.crt >> /home/vps/public_html/sunfreeyt.ovpn
@@ -528,17 +520,14 @@ reneg-sec 0
 redirect-gateway def1
 dhcp-option DNS 1.1.1.1
 dhcp-option DNS 1.0.0.1
-
 END
 echo '<ca>' >> /home/vps/public_html/OpenVPN-SSL.ovpn
 cat /etc/openvpn/ca.crt >> /home/vps/public_html/OpenVPN-SSL.ovpn
 echo '</ca>' >> /home/vps/public_html/OpenVPN-SSL.ovpn
 
 cat > /home/vps/public_html/stunnel.conf <<-END
-
 client = yes
 debug = 6
-
 [openvpn]
 accept = 127.0.0.1:110
 connect = $MYIP:587
@@ -551,23 +540,19 @@ END
 sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 openssl req -new -newkey rsa:2048 -days 3650 -nodes -x509 -sha256 -subj '/CN=127.0.0.1/O=localhost/C=PH' -keyout /etc/stunnel/stunnel.pem -out /etc/stunnel/stunnel.pem
 cat > /etc/stunnel/stunnel.conf <<-END
-
 sslVersion = all
 pid = /stunnel.pid
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
-client = nob
-
+client = no
 [openvpn]
 accept = 587
 connect = 127.0.0.1:110
 cert = /etc/stunnel/stunnel.pem
-
 [dropbear]
-accept = 444
+accept = 443
 connect = 127.0.0.1:442
 cert = /etc/stunnel/stunnel.pem
-
 END
 
 #Setting UFW
@@ -645,7 +630,6 @@ echo "admin:itangsagli" | chpasswd
 # Create and Configure rc.local
 cat > /etc/rc.local <<-END
 #!/bin/sh -e
-
 exit 0
 END
 chmod +x /etc/rc.local
